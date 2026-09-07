@@ -1,17 +1,11 @@
 const container = document.querySelector("#container");
 
-for (let i = 0; i < 16 * 16; i++) {
-    const div = document.createElement("div");
-    div.classList.add('item');
-
-    container.appendChild(div);
-}
+createGrid(16);
 
 const button = document.querySelector("button");
-let size;
 
 button.addEventListener("click", () => {
-    size = Number(prompt("Change your size"));
+    let size = Number(prompt("Change your size"));
 
     while (true) {
         if (size < 1 || size > 100) {
@@ -20,34 +14,24 @@ button.addEventListener("click", () => {
             while (container.firstChild) {
                 container.removeChild(container.firstChild);
             }
-            createGrid();
+            createGrid(size);
             break;
         }
     }
 })
 
-function createGrid() {
+function createGrid(size) {
     for (let i = 0; i < size * size; i++) {
         const div = document.createElement("div");
 
         div.classList.add('item');
+        div.style.width = `${960 / size}px`;
+        div.style.height = `${960 / size}px`;
+
+        div.addEventListener("mouseover", () => {
+            div.style.backgroundColor = "grey";
+        });
 
         container.appendChild(div);
-
-        const items = document.querySelectorAll(".item");
-
-        items.forEach((item) => {
-            item.addEventListener("mouseover", () => {
-                item.style.backgroundColor = "grey";
-            });
-        })
     }
 }
-
-const items = document.querySelectorAll(".item");
-
-items.forEach((item) => {
-    item.addEventListener("mouseover", () => {
-        item.style.backgroundColor = "grey";
-    });
-})
