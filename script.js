@@ -7,3 +7,11 @@ for (let i = 0; i < 256; i++) {
 
     container.appendChild(item);
 }
+
+const items = document.querySelectorAll(".item");
+
+items.forEach((item) => {
+    item.addEventListener("mouseover", () => {
+        item.style.backgroundColor = "grey";
+    });
+})
